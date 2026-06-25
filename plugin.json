@@ -1,0 +1,103 @@
+{
+  "id": "xunfei-image-tool",
+  "name": "讯飞图片生成",
+  "version": "1.0.0",
+  "type": "tool",
+  "description": "调用讯飞星火大模型API进行AI文生图",
+  "description_i18n": {
+    "zh-CN": "调用讯飞星火图片生成大模型/Kolors API生成图片，支持多种分辨率、调度器和参数调节",
+    "en-US": "Generate images via Xunfei Spark/HiDream/Kolors APIs with configurable parameters"
+  },
+  "author": "qwenpaw-plugin",
+  "entry": {
+    "backend": "plugin.py"
+  },
+  "dependencies": [
+    "httpx>=0.27.0"
+  ],
+  "min_version": "1.1.6",
+  "meta": {
+    "tools": [
+      {
+        "name": "xunfei_image_generate",
+        "description": "Generate images from text prompts using Xunfei Spark/HiDream/Kolors APIs",
+        "icon": "🖼️",
+        "requires_config": true,
+        "config_fields": [
+          {
+            "name": "app_id",
+            "label": "App ID",
+            "type": "text",
+            "required": true,
+            "placeholder": "your_app_id",
+            "help": "从讯飞开放平台控制台创建的应用中获取的 app_id"
+          },
+          {
+            "name": "api_key",
+            "label": "API Key",
+            "type": "text",
+            "required": true,
+            "placeholder": "your_api_key",
+            "help": "从讯飞开放平台控制台获取的 APIKey"
+          },
+          {
+            "name": "api_secret",
+            "label": "API Secret",
+            "type": "password",
+            "required": true,
+            "placeholder": "your_api_secret",
+            "help": "从讯飞开放平台控制台获取的 APISecret"
+          },
+          {
+            "name": "endpoint",
+            "label": "API 接入点",
+            "type": "select",
+            "required": true,
+            "default": "maas-api.cn-huabei-1.xf-yun.com",
+            "options": [
+              "maas-api.cn-huabei-1.xf-yun.com",
+              "xingchen-api.cn-huabei-1.xf-yun.com"
+            ],
+            "help": "选择使用的API接入点：maas-api 为图片生成大模型，xingchen-api 为 Kolors"
+          },
+          {
+            "name": "domain",
+            "label": "模型ID (domain)",
+            "type": "text",
+            "required": true,
+            "placeholder": "输入模型ID，如 sD02678...",
+            "help": "模型 ID，可从星火网页（星辰MaaS）获取，如 sD02678..."
+          },
+          {
+            "name": "default_width",
+            "label": "默认图片宽度",
+            "type": "number",
+            "required": false,
+            "default": 768,
+            "min": 256,
+            "max": 2048,
+            "help": "默认图片宽度 (像素)"
+          },
+          {
+            "name": "default_height",
+            "label": "默认图片高度",
+            "type": "number",
+            "required": false,
+            "default": 768,
+            "min": 256,
+            "max": 2048,
+            "help": "默认图片高度 (像素)"
+          },
+          {
+            "name": "patch_id",
+            "label": "Patch ID (可选)",
+            "type": "text",
+            "required": false,
+            "placeholder": "如：xopzimageturbo...",
+            "help": "非全量训练的模型需要传入 patch_id，可从星辰 MaaS 网页获取。不填则不传。"
+          }
+        ]
+      }
+    ]
+  }
+}
